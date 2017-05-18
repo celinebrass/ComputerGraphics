@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Practical 2</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+
+<script src="js/three.min.js"></script>
+<script src="js/dat.gui.min.js"></script> <!-- a GUI framework for js -->
+<script src="js/OrbitControls.js"></script>
+<script src='js/threex.keyboardstate.js'></script>
+<script src="js/Detector.js"></script> <!-- detects which opengl version is running -->
+
+<!-- js files from practicals -->
+
+<script src="practical-js/constants-practical.js"></script>
+<script src="practical-js/camera-practical.js"></script>
+<script src="practical-js/gui-practical.js"></script>
+<script src="practical-js/helpers-practical.js"></script>
+<script src="practical-js/keyboard-practical.js"></script>
+<script src="practical-js/lights-practical.js"></script>
+<script src="practical-js/textures-practical.js"></script>
+<script src="practical-js/models-practical.js"></script>
+
+<!-- load e.g. practical-js/constants-practical.js -->
+
+<div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
+<script>
+
+	// Complain if no webgl available, runs checker from Detector.js:
+	if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+	var scene, camera, renderer;
+	var cube, material, mesh;
+
+	init();
+	animate();
+
+	function init() {
+
+		//HOMEWORK STUFF
+		x_init = 5
+		x_end = 16
+		y_init = 7
+		y_end = 12
+		dx = x_end - x_init
+		dy = y_end - y_init
+		big_d = 2*dy - dx
+		y = y_init
+		for(x = x_init; x<=x_end; x++) {
+			console.log("(" + x + "," + y + ")");
+			if (big_d > 0) {
+				y++;
+				big_d = big_d - 2*dx
+			}
+			big_d = big_d + 2*dy;
+		}
+
+		// create a scene
+		scene = new THREE.Scene();
+
+		// create a perspective camera
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
+		camera.position.z = 100;
+		// create a cube with a fixed size
+		cube = new THREE.BoxGeometry( 20, 20, 20 );
+
+		// create a material of a particular colour
+		material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
+
+		// create a mesh from geometry and materials
+		mesh = new THREE.Mesh( cube, material );
+
+		// add the mesh to the scene
+		scene.add( mesh );
+
+		// create a renderer
+		renderer = new THREE.WebGLRenderer();
+		renderer.setSize( window.innerWidth, window.innerHeight ); // set its size
+		document.body.appendChild( renderer.domElement ); // append to the html
+
+		controls = new THREE.OrbitControls(camera);
+		controls.target.z = 150;
+
+		window.addEventListener( 'resize', onWindowResize, false );
+		function onWindowResize()  {
+			console.log('resizing window!!!')
+			camera.aspect = window.innerWidth / window.innerHeight;
+			renderer.setSize( window.innerWidth, window.innerHeight );
+		};
+
+
+	}
+
+	function rotateCube() {
+		mesh.rotation.x -= .01;
+		mesh.rotation.y -= .02;
+	}
+
+	function updateScene() {
+		rotateCube();
+	}
+	function updateMovement() {
+		//controls.update();
+	}
+	function animate() {
+		updateScene();
+		requestAnimationFrame( animate );
+		updateMovement();
+		// make the objects in the scene move
+		renderer.render( scene, camera );
+		//controls.update();
+
+	}
+
+
+</script>
+</body>
+</html>
