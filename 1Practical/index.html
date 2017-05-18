@@ -81,16 +81,10 @@
 		mesh.rotation.y -= .02;
 	}
 
-	function updateScene() {
-		rotateCube();
-	}
-	function updateMovement() {
-		controls.update();
-	}
+
 	function animate() {
-		updateScene();
+		rotateCube();
 		requestAnimationFrame( animate );
-		updateMovement();
 		// make the objects in the scene move
 		renderer.render( scene, camera );
 		//controls.update();
