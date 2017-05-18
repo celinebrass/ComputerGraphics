@@ -40,24 +40,6 @@
 
 	function init() {
 
-		//HOMEWORK STUFF
-		x_init = 5
-		x_end = 16
-		y_init = 7
-		y_end = 12
-		dx = x_end - x_init
-		dy = y_end - y_init
-		big_d = 2*dy - dx
-		y = y_init
-		for(x = x_init; x<=x_end; x++) {
-			console.log("(" + x + "," + y + ")");
-			if (big_d > 0) {
-				y++;
-				big_d = big_d - 2*dx
-			}
-			big_d = big_d + 2*dy;
-		}
-
 		// create a scene
 		scene = new THREE.Scene();
 
