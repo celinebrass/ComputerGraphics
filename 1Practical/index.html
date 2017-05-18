@@ -57,21 +57,28 @@
 
 		// add the mesh to the scene
 		scene.add( mesh );
-
+		initGUI();
 		// create a renderer
 		renderer = new THREE.WebGLRenderer();
 		renderer.setSize( window.innerWidth, window.innerHeight ); // set its size
 		document.body.appendChild( renderer.domElement ); // append to the html
 
-		controls = new THREE.OrbitControls(camera);
-		controls.target.z = 150;
-
 		window.addEventListener( 'resize', onWindowResize, false );
 		function onWindowResize()  {
-			console.log('resizing window!!!')
 			camera.aspect = window.innerWidth / window.innerHeight;
 			renderer.setSize( window.innerWidth, window.innerHeight );
 		};
+
+		
+		window.addEventListener("keydown", onDocumentKeyDown, false);
+		function onDocumentKeyDown(event) {
+		    var keyCode = event.which;
+		    getKeyInput(keyCode);
+
+		};
+
+		controls = new THREE.OrbitControls(camera);
+
 
 
 	}
@@ -81,13 +88,22 @@
 		mesh.rotation.y -= .02;
 	}
 
+	function updateControls() {
+  		controls.update();
+    	}
+
+	function updateMovement() {
+		requestAnimationFrame( animate );
+		getKeyInput();
+	}
 
 	function animate() {
+				
 		rotateCube();
-		requestAnimationFrame( animate );
-		// make the objects in the scene move
+		updateMovement();// make the objects in the scene move
 		renderer.render( scene, camera );
-		//controls.update();
+		updateControls();
+		
 
 	}
 

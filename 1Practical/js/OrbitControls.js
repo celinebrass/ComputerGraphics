@@ -6,7 +6,7 @@
  * @author erich666 / http://erichaines.com
  * @author mrflix / http://felixniklas.de
  */
-/*global THREE, console */
+//global THREE, console; 
 
 // This set of controls performs orbiting, dollying (zooming), and panning. It maintains
 // the "up" direction as +Y, unlike the TrackballControls. Touch on tablet and phones is
