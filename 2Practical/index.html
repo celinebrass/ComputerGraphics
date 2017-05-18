@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <body>
+    <canvas width = "1024" height = "1024" id = "Practical2"></canvas>
+
+    <script>
+
+      /*============= Creating a canvas =================*/
+      var canvas = document.getElementById('Practical2');
+      gl = canvas.getContext('experimental-webgl');
+
+      function start() {
+      var canvas = document.getElementById('glCanvas');
+
+
+      /*============ Defining and storing the geometry =========*/
+
+
+      // Create and store data into vertex buffer
+
+      // Create and store data into colour buffer
+
+      // Create and store data into index buffer
+
+      /*=================== Shaders =========================*/
+
+      /* ====== Associating attributes to vertex shader =====*/
+
+      // Position
+
+      // Colour
+
+      /*==================== MATRIX =====================*/
+      // get_projection(fov, aspect, near, far){
+      // }
+
+      //var proj_matrix = get_projection(40, canvas.width/canvas.height, 1, 1000);
+      //var mov_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+      //var view_matrix = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+
+      // translating z - move slightly away from the origin
+
+      /*==================== Rotation of primitive ====================*/
+      function rotateZ(m, angle) {
+
+      }
+
+      function rotateX(m, angle) {
+
+      }
+
+      function rotateY(m, angle) {
+
+      }
+
+
+      function transZ(m, angle) {
+
+      }
+
+      function transX(m, angle) {
+
+      }
+
+      function transY(m, angle) {
+
+      }
+
+
+      function scaleZ(m, angle) {
+
+      }
+
+      function scaleX(m, angle) {
+
+      }
+
+      function scaleY(m, angle) {
+
+      }
+
+
+      /*================= Drawing and updating the scene===========================*/
+      var time_old = 0;
+
+      var animate = function(time) {
+
+      var dt = time-time_old;
+      // rotateZ(mov_matrix, dt*0.0005);//time
+      // rotateY(mov_matrix, dt*0.0002);
+      // rotateX(mov_matrix, dt*0.0003);
+      time_old = time;
+
+      updateOpenGL();
+
+      window.requestAnimationFrame(animate);
+      }
+
+      function updateOpenGL(){
+
+        gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LEQUAL);
+        gl.clearColor(0.0, 0.0, 0.0, 0.9);
+        gl.clearDepth(1.0);
+
+        gl.viewport(0.0, 0.0, canvas.width, canvas.height);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.uniformMatrix4fv(Pmatrix, false, proj_matrix);
+        gl.uniformMatrix4fv(Vmatrix, false, view_matrix);
+        gl.uniformMatrix4fv(Mmatrix, false, mov_matrix);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, index_buffer);
+        gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+      }
+
+      animate(0);
+
+    </script>
+
+  </body>
+</html>
