@@ -5,6 +5,7 @@
    /////////////////////////
    // KEYBOARD & MOVEMENT //
    /////////////////////////
+  var delta = 100;
   function getKeyInput(key){
     // insert keyboard input here!
 
