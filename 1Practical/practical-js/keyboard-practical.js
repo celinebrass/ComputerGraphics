@@ -1,5 +1,5 @@
-/* 
-   Practical 2 
+/*
+   Practical 2
 */
 
    /////////////////////////
@@ -14,7 +14,7 @@
       console.log('x : ' + camera.rotation.x);
       console.log('y : ' + camera.rotation.y);
       console.log('z : ' + camera.rotation.z);
-    }   
+    }
 
     else if (key == 80){
       //p
@@ -29,6 +29,19 @@
     }
     //a
     else if (key==65) {
-      camera.rotation.x -= 100;
+      camera.position.x = camera.position.x - delta
     }
+    //d
+    else if (key==68) {
+      camera.position.x = camera.position.x + delta
+    }
+    //w
+    else if (key==87) {
+      camera.position.z = camera.position.z + delta
+    }
+    //s
+    else if (key==83) {
+      camera.position.z = camera.position.z - delta
+    }
+
   }

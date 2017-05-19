@@ -69,12 +69,11 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 		};
 
-		
+
 		window.addEventListener("keydown", onDocumentKeyDown, false);
 		function onDocumentKeyDown(event) {
 		    var keyCode = event.which;
 		    getKeyInput(keyCode);
-
 		};
 
 		controls = new THREE.OrbitControls(camera);
@@ -90,7 +89,7 @@
 
 	function updateControls() {
   		controls.update();
-    	}
+  }
 
 	function updateMovement() {
 		requestAnimationFrame( animate );
@@ -98,12 +97,12 @@
 	}
 
 	function animate() {
-				
+
 		rotateCube();
 		updateMovement();// make the objects in the scene move
 		renderer.render( scene, camera );
 		updateControls();
-		
+
 
 	}
 
