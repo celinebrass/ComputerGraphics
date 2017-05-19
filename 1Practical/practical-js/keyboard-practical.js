@@ -45,5 +45,14 @@
     else if (key==83) {
       camera.position.z = camera.position.z - delta
     }
+    //up
+    else if (key==38) {
+      camera.position.y = camera.position.y + delta
+    }
+
+    //down
+    else if (key==40) {
+      camera.position.y = camera.position.y - delta
+    }
 
   }
