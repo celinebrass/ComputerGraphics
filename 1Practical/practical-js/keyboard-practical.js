@@ -32,27 +32,33 @@
     //a
     else if (key==65) {
       camera.position.x = camera.position.x - delta
+      camera.lookAt(new THREE.vector(0,0,100));
     }
     //d
     else if (key==68) {
       camera.position.x = camera.position.x + delta
+      camera.lookAt(new THREE.vector(0,0,100));
     }
     //w
     else if (key==87) {
       camera.position.z = camera.position.z + delta
+      camera.lookAt(new THREE.vector(0,0,100));
     }
     //s
     else if (key==83) {
       camera.position.z = camera.position.z - delta
+      camera.lookAt(new THREE.vector(0,0,100));
     }
     //up
     else if (key==38) {
       camera.position.y = camera.position.y + delta
+      camera.lookAt(new THREE.vector(0,0,100));
     }
 
     //down
     else if (key==40) {
       camera.position.y = camera.position.y - delta
+      camera.lookAt(new THREE.vector(0,0,100));
     }
 
   }
