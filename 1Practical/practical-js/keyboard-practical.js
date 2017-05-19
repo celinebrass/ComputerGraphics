@@ -5,8 +5,9 @@
    /////////////////////////
    // KEYBOARD & MOVEMENT //
    /////////////////////////
-  var delta = 100;
+
   function getKeyInput(key){
+    var delta = 100;
     // insert keyboard input here!
 
    if (key == 88){
