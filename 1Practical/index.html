@@ -50,16 +50,20 @@
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000000);
 		camera.position.z = 80000;
 		// create a cube with a fixed size
-		sphere = new THREE.SphereGeometry( 10900, segments, segments);
-
-		// create a material of a particular colour
+		sphere = new THREE.SphereGeometry( radii[0], segments, segments);
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
+		sun = new THREE.Mesh( sphere, material );
+		sun.position.x = distance[0];
+		scene.add( sun );
 
-		// create a mesh from geometry and materials
+		sphere = new THREE.SphereGeometry( radii[1], segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
+		material.map = bodiesTex[1];
 		mesh = new THREE.Mesh( sphere, material );
-
-		// add the mesh to the scene
+		mesh.position.x = distance[0];
 		scene.add( mesh );
+
+
 		axesHelper();
 		gridHelper();
 		loadTextures();

@@ -1,5 +1,5 @@
-/* 
-   Practical 2 
+/*
+   Practical 2
 */
 
 var bodiesTex = [];
@@ -14,7 +14,7 @@ function loadTextures(){
 	bodiesTex[5] = THREE.ImageUtils.loadTexture('images/marsmap.jpg')
 	bodiesTex[6] = THREE.ImageUtils.loadTexture('images/jupitermap.jpg')
 	bodiesTex[7] = THREE.ImageUtils.loadTexture('images/saturnmap.jpg')
-	bodiesTex[8] = THREE.ImageUtils.loadTexture('images/uranusemap.jpg')
+	bodiesTex[8] = THREE.ImageUtils.loadTexture('images/uranusmap.jpg')
 	bodiesTex[9] = THREE.ImageUtils.loadTexture('images/neptunemap.jpg')
 	bodiesTex[10] = THREE.ImageUtils.loadTexture('images/plutomap.jpg')
 }
