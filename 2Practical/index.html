@@ -201,30 +201,37 @@
 
 
       function scaleZ(m, angle) {
-
+        m[10] *= angle
       }
 
       function scaleX(m, angle) {
-
+        m[0] *= angle
       }
 
       function scaleY(m, angle) {
-
+        m[5] *= angle
       }
 
       /*================= Drawing and updating the scene===========================*/
       var time_old = 0;
       var translate = -.01;
       var t = 0
+      var scale = .99
       var animate = function(time) {
 
         var dt = time-time_old;
-        rotateZ(mov_matrix, dt*0.0005);//time
-        rotateY(mov_matrix, dt*0.0002);
-        rotateX(mov_matrix, dt*0.0003);
         transX(mov_matrix, translate);
         transY(mov_matrix, translate);
         transZ(mov_matrix, translate);
+
+        scaleX(mov_matrix, scale);
+        scaleY(mov_matrix, scale);
+        scaleZ(mov_matrix, scale);
+
+        rotateZ(mov_matrix, dt*0.0005);//time
+        rotateY(mov_matrix, dt*0.0005);
+        rotateX(mov_matrix, dt*0.0005);
+
         if (t % 200 == 0) {translate = translate * -1;}
         t++;
         time_old = time;
