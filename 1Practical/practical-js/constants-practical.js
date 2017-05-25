@@ -22,6 +22,9 @@
    var NEPTUNE_RADIUS = 388.0;
    var PLUTO_RADIUS = 186.0;
    var SUN_RADIUS = 10900;
+
+   var radii = [10900, 27.24, 38.3, 94.9, 100, 53.2, 1121.0, 945.0, 401.0, 338.0, 18.6];
+   var distance = [0,0.3+149,58, 108, 149,227, 778, 1427, 1780, 2794, 3680];
    var PLANETARY_DETAIL = new THREE.Vector3(EARTH_RADIUS,20,20); // default: 20 segments
 
    var whSegments = 20; // default: 20 segments - widthSegments and heightSegments

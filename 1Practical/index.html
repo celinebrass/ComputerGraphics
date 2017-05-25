@@ -35,6 +35,8 @@
 	var scene, camera, renderer;
 	var cube, material, mesh;
 	var delta = 100;
+	var sun_radius = 10900;
+	var segments = 20;
 
 	init();
 	animate();
@@ -45,20 +47,22 @@
 		scene = new THREE.Scene();
 
 		// create a perspective camera
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000);
-		camera.position.z = 100;
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000000);
+		camera.position.z = 80000;
 		// create a cube with a fixed size
-		cube = new THREE.BoxGeometry( 20, 20, 20 );
+		sphere = new THREE.SphereGeometry( 10900, segments, segments);
 
 		// create a material of a particular colour
-		material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe: true } );
+		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
 
 		// create a mesh from geometry and materials
-		mesh = new THREE.Mesh( cube, material );
+		mesh = new THREE.Mesh( sphere, material );
 
 		// add the mesh to the scene
 		scene.add( mesh );
 		axesHelper();
+		gridHelper();
+		loadTextures();
 		initGUI();
 		// create a renderer
 		renderer = new THREE.WebGLRenderer();
@@ -70,7 +74,6 @@
 			camera.aspect = window.innerWidth / window.innerHeight;
 			renderer.setSize( window.innerWidth, window.innerHeight );
 		};
-
 
 		window.addEventListener("keydown", onDocumentKeyDown, false);
 		function onDocumentKeyDown(event) {
@@ -88,6 +91,7 @@
 		mesh.rotation.x -= .01;
 		mesh.rotation.y -= .02;
 	}
+
 
 	function updateControls() {
   		controls.update();
