@@ -42,25 +42,18 @@
 	animate();
 
 	function init() {
-
 		// create a scene
 		scene = new THREE.Scene();
-
+		loadTextures();
 		// create a perspective camera
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000000);
 		camera.position.z = 80000;
-		// create a cube with a fixed size
+
 		sphere = new THREE.SphereGeometry( radii[0], segments, segments);
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
-		sun = new THREE.Mesh( sphere, material );
-		sun.position.x = distance[0];
-		scene.add( sun );
-
-		sphere = new THREE.SphereGeometry( radii[1], segments, segments);
-		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
-		material.map = bodiesTex[1];
+		material.map = THREE.ImageUtils.loadTexture('images/sunmap.jpg')
 		mesh = new THREE.Mesh( sphere, material );
-		mesh.position.x = distance[0];
+		mesh.position.x = 500;
 		scene.add( mesh );
 
 

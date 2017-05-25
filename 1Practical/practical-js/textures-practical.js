@@ -5,7 +5,7 @@
 var bodiesTex = [];
 function loadTextures(){
 
-	material.map    = THREE.ImageUtils.loadTexture('images/sunmap.jpg')
+	//sun_material.map    = THREE.ImageUtils.loadTexture('images/sunmap.jpg')
 	bodiesTex[0] = THREE.ImageUtils.loadTexture('images/sunmap.jpg')
 	bodiesTex[1] = THREE.ImageUtils.loadTexture('images/moonmap.jpg')
 	bodiesTex[2] = THREE.ImageUtils.loadTexture('images/mercurymap.jpg')
