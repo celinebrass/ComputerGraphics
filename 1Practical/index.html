@@ -35,8 +35,13 @@
 	var scene, camera, renderer;
 	var cube, material, mesh;
 	var delta = 100;
-	var sun_radius = 10900;
+	var sun_radius = 5000;
+	var earth_distance = 20000;
 	var segments = 20;
+
+	var sun, moon, skybox, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto;
+
+	var sunO, mercuryO, venusO, earthO, marsO, jupiterO, saturnO, uranusO, neptuneO, plutO;
 
 	init();
 	animate();
@@ -45,16 +50,115 @@
 		// create a scene
 		scene = new THREE.Scene();
 		loadTextures();
+
 		// create a perspective camera
 		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000000);
 		camera.position.z = 80000;
 
-		sphere = new THREE.SphereGeometry( radii[0], segments, segments);
+		//initialize pivots.
+		mercuryO = new THREE.Object3D();
+		venusO = new THREE.Object3D();
+		marsO = new THREE.Object3D();
+		jupiterO = new THREE.Object3D();
+		earthO = new THREE.Object3D();
+		saturnO = new THREE.Object3D();
+		uranusO = new THREE.Object3D();
+		neptuneO = new THREE.Object3D();
+		plutoO = new THREE.Object3D();
+
+		sphere = new THREE.SphereGeometry( 5000, segments, segments);
 		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
 		material.map = THREE.ImageUtils.loadTexture('images/sunmap.jpg')
-		mesh = new THREE.Mesh( sphere, material );
-		mesh.position.x = 500;
-		scene.add( mesh );
+		sun = new THREE.Mesh( sphere, material );
+		sun.position.x = distance[0];
+		scene.add( sun );
+
+		sphere = new THREE.SphereGeometry( 380, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffff00, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/mercurymap.jpg')
+		mercury = new THREE.Mesh( sphere, material );
+		mercury.position.set(.38*earth_distance, 0, 0);
+		mercuryO.add( mercury );
+		scene.add(mercuryO);
+
+		sphere = new THREE.SphereGeometry( 950, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/venusmap.jpg')
+		venus = new THREE.Mesh( sphere, material );
+		venus.position.set(.72*earth_distance, 0, 0);
+		venusO.add( venus );
+		scene.add(venusO);
+
+		sphere = new THREE.SphereGeometry( 1000, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/earthmap.jpg')
+		earth = new THREE.Mesh( sphere, material );
+		earth.position.set(earth_distance, 0, 0);
+		earthO.add( earth );
+		scene.add(earthO);
+
+		sphere = new THREE.SphereGeometry( 530, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/marsmap.jpg')
+		mars = new THREE.Mesh( sphere, material );
+		mars.position.set(1.52*earth_distance, 0, 0);
+		marsO.add(mars);
+		scene.add( marsO );
+
+		sphere = new THREE.SphereGeometry( 3000, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/jupitermap.jpg')
+		jupiter = new THREE.Mesh( sphere, material );
+		jupiter.position.set(2*earth_distance, 0, 0);
+		jupiterO.add(jupiter);
+		scene.add( jupiterO );
+
+		sphere = new THREE.SphereGeometry( 2500, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/saturnmap.jpg')
+		saturn = new THREE.Mesh( sphere, material );
+		saturn.position.set(2.6*earth_distance, 0, 0);
+		saturnO.add(saturn);
+		scene.add( saturnO );
+
+		sphere = new THREE.SphereGeometry( 2000, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/uranusmap.jpg')
+		uranus = new THREE.Mesh( sphere, material );
+		uranus.position.set(3.2*earth_distance, 0, 0);
+		uranusO.add(uranus);
+		scene.add( uranusO );
+
+		sphere = new THREE.SphereGeometry( 1500, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/neptunemap.jpg')
+		neptune = new THREE.Mesh( sphere, material );
+		neptune.position.set(3.8*earth_distance, 0, 0);
+		neptuneO.add(neptune);
+		scene.add( neptuneO );
+
+		sphere = new THREE.SphereGeometry(1500, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/plutomap.jpg')
+		pluto = new THREE.Mesh( sphere, material );
+		pluto.position.set(4.4*earth_distance, 0, 0);
+		plutoO.add(pluto);
+		scene.add( plutoO );
+
+		sphere = new THREE.SphereGeometry( 10900/40, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/moonmap.jpg')
+		moon = new THREE.Mesh( sphere, material );
+		moon.position.set(earth_distance + 1500, 0, 0);
+		earthO.add( moon );
+
+		sphere = new THREE.SphereGeometry( DEFAULT_FAR, segments, segments);
+		material = new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: false } );
+		material.map = THREE.ImageUtils.loadTexture('images/skybox.jpg')
+		material.side = THREE.DoubleSide;
+		skybox = new THREE.Mesh( sphere, material );
+		skybox.position.set(0, 0, 0);
+		scene.add( skybox );
 
 
 		axesHelper();
@@ -85,8 +189,30 @@
 	}
 
 	function rotateCube() {
-		mesh.rotation.x -= .01;
-		mesh.rotation.y -= .02;
+
+		mercury.rotation.y -= .002;
+		venus.rotation.y += .001;
+		earth.rotation.y -= .01;
+		moon.rotation.y -= .1;
+		mars.rotation.y -=.01;
+		jupiter.rotation.y -= .02;
+		saturn.rotation.y -= .02;
+		uranus.rotation.y+= .015;
+		neptune.rotation.y -= .018;
+		pluto.rotation.y -= .002;
+
+		mercuryO.rotation.y -= .015;
+		venusO.rotation.y += .011;
+		earthO.rotation.y -= .01;
+		marsO.rotation.y -=.008;
+		jupiterO.rotation.y -= .004;
+		saturnO.rotation.y -= .003;
+		uranusO.rotation.y+= .002;
+		neptuneO.rotation.y -= .001;
+		plutoO.rotation.y -= .001;
+
+
+
 	}
 
 
@@ -101,7 +227,7 @@
 
 	function animate() {
 
-		//rotateCube();
+		rotateCube();
 		updateMovement();// make the objects in the scene move
 		renderer.render( scene, camera );
 		updateControls();
